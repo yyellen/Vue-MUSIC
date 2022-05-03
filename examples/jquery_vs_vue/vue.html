@@ -1,0 +1,29 @@
+<div id="app">
+    <article v-for="p in posts">
+        <p>{{p.author}}</p>
+        <span>{{p.time}}</span>
+        <div>{{p.content}}</div>
+    </article>
+</div>
+
+
+<script src="../../src/jquery.js"></script>
+<script src="../../src/vue.js"></script>
+<script>
+
+$.getJSON("posts.json",function(posts){
+
+    var App = new Vue ({
+        el : "#app" ,
+        data :{
+            posts : posts
+        }
+    })
+
+    console.log(posts)
+
+})
+</script>
+
+
+<!-- 優點 -->

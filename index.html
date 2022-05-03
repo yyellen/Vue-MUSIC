@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.5/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/font-awesome@4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+
+  <body >
+    <div id="app">
+        <nav class="container">
+            <h1 class="pull-left">獨立音樂活動清單</h1>
+
+            <div class="pull-left tabs">
+                <!-- 不同的分頁 -->
+                <span class="glyphicon glyphicon-th-large" ></span>
+                <span class="glyphicon glyphicon-star"     ></span>
+            </div>
+
+            <div class="pull-right">
+                <!-- 不同的過濾器 -->
+                <span class="glyphicon glyphicon-time"     ></span>
+                <span class="glyphicon glyphicon-tag"      ></span>
+                <input type="text"  placeholder="過濾器">
+            </div>
+        </nav>
+
+        <main class="container">
+            <div class="items">
+                <article class="item" >
+
+                    <header>
+                        <h1>活動名</h1>
+                        <div class="animation-swipe star" >
+                          <span class="glyphicon glyphicon-star"></span>
+                        </div>
+                    </header>
+
+                    <dl>
+                        <dt>時間</dt>
+                        <dd>時間</dd>
+                    </dl>
+
+                    <dl>
+                        <dt>價錢</dt>
+                        <dd>價錢</dd>
+                    </dl>
+
+                    <dl>
+                        <dt>地點</dt>
+                        <dd>地點</dd>
+                    </dl>
+
+                </article>
+            </div>
+        </main>
+
+        <footer class="container">
+            <span >目前資料總價</span >
+            <span >目前還沒有資料。</span >
+        </footer>
+
+    </div>
+
+
+
+    <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/bootstrap@3.3.5/dist/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+
+        $.getJSON("./show.min.json",function(json){
+
+            window.app = new Vue({
+                el : "#app",
+                data : {
+                },
+                methods : {
+                    toggle_like : function (s){
+                        console.log(s)
+                    }
+                },
+                computed : {
+                    current_activities : function (){
+
+                    },
+
+                    total : function (){
+                    }
+                }
+            })
+        })
+    </script>
+
+  </body>
+</html>

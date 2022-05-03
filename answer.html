@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.5/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/font-awesome@4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <meta charset="utf-8">
+  </head>
+
+  <body >
+    <div id="app">
+        <nav class="container">
+            <h1 class="pull-left">獨立音樂活動清單</h1>
+
+            <div class="pull-left tabs">
+                <!-- 不同的分頁 -->
+                <span class="glyphicon glyphicon-th-large" @click="control.tab = 'all' "></span>
+                <span class="glyphicon glyphicon-star"     @click="control.tab = 'star' "></span>
+            </div>
+
+            <div class="pull-right">
+                <!-- 不同的過濾器 -->
+                <span class="glyphicon glyphicon-time"     @click="control.sort   = 'time' "></span>
+                <span class="glyphicon glyphicon-yen"      @click="control.sort   = 'price' "></span>
+                <input type="text" v-model="control.filter" placeholder="過濾器">
+            </div>
+        </nav>
+
+        <main class="container">
+            <div class="items">
+                <article class="item" v-for="s in current_activities">
+
+                    <header>
+                        <h1>{{s.title}}</h1>
+                        <div class="animation-swipe star" :class="{ favorite : favorite[s.uid] } " @click="toggle_like(s)">
+                          <span class="glyphicon glyphicon-star"></span>
+                        </div>
+                    </header>
+
+                    <dl>
+                        <dt>時間</dt>
+                        <dd>{{s.time}}</dd>
+                    </dl>
+
+                    <dl>
+                        <dt>價錢</dt>
+                        <dd>{{s.price}}</dd>
+                    </dl>
+
+                    <dl>
+                        <dt>地點</dt>
+                        <dd>{{s.address}}</dd>
+                    </dl>
+
+                </article>
+            </div>
+        </main>
+
+        <footer class="container">
+            <span v-if="current_activities && current_activities.length ">{{total}}</span >
+            <span v-else>目前還沒有資料。</span >
+        </footer>
+
+    </div>
+
+
+
+    <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/bootstrap@3.3.5/dist/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+
+        $.getJSON("./show.min.json",function(json){
+
+            Vue.createApp({
+                data () {
+                    return {
+                        activities : json ,
+                        favorite : {},
+                        control : {
+                            filter : "" ,
+                            sort : "" ,
+                            tab : "all" ,
+                        }
+                    }
+                },
+                methods : {
+
+                    toggle_like : function (s){
+
+                        this.favorite[s.uid] = this.favorite[s.uid] ? false : true 
+
+                        //this.$set(this.favorite, s.uid , this.favorite[s.uid] ?  false : true )
+                        console.log(this.favorite)
+                    }
+                },
+                computed : {
+                    total : function (){
+
+                        var sum = 0
+                        for (var i = 0 ; i < this.current_activities.length ; i++)
+                            sum += this.current_activities[i].price
+                        return sum
+
+                    },
+                    current_activities : function (){
+
+                        var vm = this
+                        var current = []
+
+                        // Tab
+                        switch (vm.control.tab){
+                            case "all" :
+                                current = vm.activities
+                                break
+                            case "star" :
+                                current = vm.activities.filter(function(s){
+                                    return vm.favorite[s.uid]
+                                })
+                        }
+
+                        // Filter
+                        if (vm.control.filter && vm.control.filter.length > 0 ){
+                            current = current.filter(function(s){
+                                var search = vm.control.filter.toLowerCase()
+                                var title = s.title.toLowerCase()
+                                return title.indexOf(search) > -1
+                            })
+                        }
+
+                        // Sort
+                        switch (vm.control.sort){
+                            case "time" :
+                                current = current.sort(function(a,b){
+                                    return a.time.localeCompare(b.time )
+                                })
+                                break ;
+                            case "price" :
+                                current = current.sort(function(a,b){
+                                    return parseInt(a.price) - parseInt(b.price)
+                                })
+                                break ;
+                            default : break ;
+                        }
+                        return current
+                    }
+                }
+            }).mount('#app')
+        })
+    </script>
+
+  </body>
+</html>

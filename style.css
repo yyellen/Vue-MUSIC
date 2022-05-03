@@ -1,0 +1,98 @@
+html * {
+  box-sizing: border-box;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out; }
+
+.animation-swipe {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  color: #84af1b; }
+  .animation-swipe:before {
+    box-sizing: border-box;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -2.5rem;
+    bottom: 0;
+    left: 0;
+    border-bottom: 2.5rem solid #84af1b;
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%); }
+  .animation-swipe:hover:before {
+    -webkit-transform: translateX(0);
+    transform: translateX(0); }
+  .animation-swipe.favorite {
+    color: yellow !important; }
+    .animation-swipe.favorite:before {
+      -webkit-transform: translateX(0);
+      transform: translateX(0); }
+
+body {
+  background: #eeeeee; }
+
+nav {
+  margin: 30px 0;
+  color: #939393;
+  font-size: 2rem; }
+  nav h1 {
+    font-size: 1em;
+    margin: 0; }
+  nav .pull-right {
+    letter-spacing: .2em; }
+
+.items {
+  margin: 0 -20px;
+  display: flex;
+  flex-wrap: wrap; }
+  .items .item {
+    width: calc(50% - 20px * 2);
+    margin: 20px;
+    padding: 20px; }
+
+.item {
+  background: white;
+  border-left: 50px solid #84af1b;
+  box-shadow: 3px 1px 3px #c6c6c6;
+  display: flex;
+  flex-wrap: wrap; }
+  .item header {
+    position: relative;
+    width: 100%; }
+    .item header h1 {
+      font-size: 1.5rem;
+      line-height: 2rem;
+      padding-right: 2.5rem;
+      color: #84af1b;
+      margin: 0;
+      margin-bottom: 10px; }
+    .item header .star {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 2.5rem;
+      text-align: center;
+      line-height: 2.5rem;
+      background: #dadada;
+      color: white; }
+  .item dl {
+    width: 100%;
+    margin-bottom: 0; }
+    .item dl * {
+      vertical-align: text-top;
+      display: inline-block;
+      line-height: 2rem; }
+    .item dl dt {
+      font-size: 1rem;
+      color: #dadada;
+      width: 2.5rem;
+      padding-right: 0.5rem; }
+    .item dl dd {
+      width: calc(100% - 2.5rem - 0.5rem); }
+
+.tabs {
+    padding-left: 30px;
+}

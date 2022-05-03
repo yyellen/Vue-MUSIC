@@ -1,0 +1,26 @@
+<div id="app">
+
+</div>
+
+<script src="../../src/jquery.js"></script>
+<script>
+    $.getJSON("posts.json",function (dataArray){
+
+        var htmlString = ""
+        for (var i = 0 ; i < dataArray.length ; i++){
+
+            var post = dataArray[i]
+            htmlString +=
+            "<article>\
+                <p>" + post.author +"</p>\
+                <span>" + post.time +"</span>\
+                <div>"+ post.content +"</div>\
+            </article>"
+        }
+        $("#app").append(htmlString)
+    })
+</script>
+
+
+<!-- 缺點 -->
+<!-- 1. 要把整個 javascript 讀完才知道這個網頁長怎樣 -->

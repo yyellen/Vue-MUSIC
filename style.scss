@@ -1,0 +1,174 @@
+$gray-bg : rgb(238, 238, 238) ;
+$gray-shadow : rgb(198, 198, 198) ;
+$gray : rgb(218, 218, 218)  ;
+$green : rgb(132, 175, 27) ;
+
+
+html * {
+  box-sizing: border-box;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+
+
+.animation-swipe {
+
+  display: block;
+  position: relative;
+  overflow: hidden;
+
+  cursor: pointer;
+  color: $green;
+
+
+  &:before {
+    box-sizing: border-box;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -2.5rem;
+    bottom: 0;
+    left: 0;
+    // border-right: 2.5rem solid transparent;
+    border-bottom: 2.5rem solid $green;
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+
+  &:hover {
+    &:before {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+  }
+
+  &.favorite {
+      color: yellow !important;
+      &:before {
+          -webkit-transform: translateX(0);
+          transform: translateX(0);
+      }
+
+  //     &:hover {
+  //       &:before {
+  //           -webkit-transform: translateX(100%);
+  //           transform: translateX(100%);
+  //       }
+  //     }
+  }
+}
+
+body {
+  background: $gray-bg;
+}
+
+nav {
+  // width: 80%;
+  margin: 30px 0;
+  color: rgb(147, 147, 147);
+  font-size: 2rem;
+
+  h1 {
+      font-size : 1em ;
+      margin : 0 ;
+  }
+
+  .pull-right {
+      letter-spacing: .2em;
+  }
+}
+
+.items {
+
+  $spacing : 20px ;
+  margin: 0 (-$spacing);
+  display: flex;
+  flex-wrap: wrap;
+
+  .item {
+
+      $padding : 20px ;
+
+      width: calc(50% - #{$spacing} * 2 );
+      margin: $spacing;
+      padding : $padding ;
+  }
+
+}
+
+
+.item {
+
+  background: white;
+  border-left: 50px solid $green;
+  box-shadow: 3px 1px 3px $gray-shadow;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  header {
+    position: relative;
+    width: 100%;
+
+    h1 {
+      font-size: 1.5rem;
+      line-height: 2rem;
+      padding-right: 2.5rem;
+      color: $green;
+      margin: 0;
+      margin-bottom: 10px;
+    }
+
+    .star {
+      position: absolute;
+      right: 0;
+      top: 0;
+
+      width: 2.5rem;
+      text-align: center;
+      line-height: 2.5rem;
+
+
+      background: $gray ;
+      color: white ;
+
+    }
+  }
+
+
+  dl {
+
+    $title-width : 2.5rem ;
+    $spacing : .5rem ;
+
+    width: 100%;
+    margin-bottom: 0;
+
+    * {
+      vertical-align: text-top;
+      display: inline-block;
+      line-height: 2rem;
+    }
+
+    dt {
+      font-size: 1rem;
+      color: $gray;
+
+      width: $title-width;
+      padding-right: $spacing ;
+
+    }
+
+    dd {
+      width: calc(100% - #{$title-width} - #{$spacing} );
+    }
+  }
+
+}
+
+.tabs {
+    padding-left: 30px; 
+}
